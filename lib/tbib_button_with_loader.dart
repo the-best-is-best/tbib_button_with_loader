@@ -14,6 +14,8 @@ typedef IsSuccess = void Function(bool isSuccess);
 class ButtonWithLoader extends StatefulWidget {
   final String title;
   final TextStyle? titleStyle;
+
+  /// Use To Add style and loader
   final ButtonLoaderData buttonData;
 
   /// receive startLoading , stopLoading, isSuccess m btnState
@@ -53,73 +55,86 @@ class _ButtonWithLoaderState extends State<ButtonWithLoader> {
       duration: widget.buttonData.buttonLoader.animatedDuration,
       child: state == ButtonSpinnerState.init
           ? (widget.buttonData.useFluentUi
-              ? FilledButton(
-                  key: widget.buttonData.buttonKey,
-                  autofocus: widget.buttonData.autofocus,
-                  focusNode: widget.buttonData.focusNode,
-                  style: widget.buttonData.fluentButtonStyle,
-                  onPressed: () {
-                    widget.onPressed
-                        ?.call(startLoading, stopLoading, isSuccess, state);
-                  },
-                  onLongPress: () => widget.onLongPressed
-                      ?.call(startLoading, stopLoading, isSuccess, state),
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Center(
-                      child: FittedBox(
-                        child: Text(
-                          widget.title,
-                          style: widget.titleStyle,
-                        ),
-                      ),
-                    ),
-                  ))
-              : Platform.isAndroid
-                  ? mat.FilledButton(
+              ? ClipRRect(
+                  borderRadius:
+                      BorderRadius.circular(widget.buttonData.borderRadius),
+                  child: FilledButton(
                       key: widget.buttonData.buttonKey,
                       autofocus: widget.buttonData.autofocus,
                       focusNode: widget.buttonData.focusNode,
-                      onPressed: () => widget.onPressed
-                          ?.call(startLoading, stopLoading, isSuccess, state),
-                      onLongPress: () => widget.onLongPressed
-                          ?.call(startLoading, stopLoading, isSuccess, state),
-                      style: widget.buttonData.flutterButtonStyle,
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          widget.title,
-                          style: widget.titleStyle,
-                        ),
-                      ),
-                    )
-                  : CupertinoButton.filled(
-                      key: widget.buttonData.buttonKey,
-                      onPressed: () async {
+                      style: widget.buttonData.fluentButtonStyle,
+                      onPressed: () {
                         widget.onPressed
                             ?.call(startLoading, stopLoading, isSuccess, state);
                       },
-                      minSize: widget.buttonData.curpertinoButtonStyle?.minSize,
-
-                      // style
-                      alignment:
-                          widget.buttonData.curpertinoButtonStyle?.alignment ??
-                              Alignment.center,
-                      borderRadius:
-                          widget.buttonData.curpertinoButtonStyle?.borderRadius,
-                      disabledColor: widget.buttonData.curpertinoButtonStyle
-                              ?.disabledColor ??
-                          CupertinoColors.quaternarySystemFill,
-                      pressedOpacity: widget.buttonData.curpertinoButtonStyle
-                              ?.pressedOpacity ??
-                          0.4,
-
-                      padding: const EdgeInsets.all(8),
+                      onLongPress: () => widget.onLongPressed
+                          ?.call(startLoading, stopLoading, isSuccess, state),
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          widget.title,
-                          style: widget.titleStyle,
+                        child: Center(
+                          child: FittedBox(
+                            child: Text(
+                              widget.title,
+                              style: widget.titleStyle,
+                            ),
+                          ),
+                        ),
+                      )),
+                )
+              : Platform.isAndroid
+                  ? ClipRRect(
+                      borderRadius:
+                          BorderRadius.circular(widget.buttonData.borderRadius),
+                      child: mat.FilledButton(
+                        key: widget.buttonData.buttonKey,
+                        autofocus: widget.buttonData.autofocus,
+                        focusNode: widget.buttonData.focusNode,
+                        onPressed: () => widget.onPressed
+                            ?.call(startLoading, stopLoading, isSuccess, state),
+                        onLongPress: () => widget.onLongPressed
+                            ?.call(startLoading, stopLoading, isSuccess, state),
+                        style: widget.buttonData.materialButtonStyle,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Text(
+                            widget.title,
+                            style: widget.titleStyle,
+                          ),
+                        ),
+                      ),
+                    )
+                  : ClipRRect(
+                      borderRadius:
+                          BorderRadius.circular(widget.buttonData.borderRadius),
+                      child: CupertinoButton.filled(
+                        key: widget.buttonData.buttonKey,
+                        onPressed: () async {
+                          widget.onPressed?.call(
+                              startLoading, stopLoading, isSuccess, state);
+                        },
+                        minSize:
+                            widget.buttonData.cupertinoButtonStyle?.minSize,
+
+                        // style
+                        alignment:
+                            widget.buttonData.cupertinoButtonStyle?.alignment ??
+                                Alignment.center,
+                        borderRadius: widget
+                            .buttonData.cupertinoButtonStyle?.borderRadius,
+                        disabledColor: widget.buttonData.cupertinoButtonStyle
+                                ?.disabledColor ??
+                            CupertinoColors.quaternarySystemFill,
+                        pressedOpacity: widget.buttonData.cupertinoButtonStyle
+                                ?.pressedOpacity ??
+                            0.4,
+
+                        padding: const EdgeInsets.all(8),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Text(
+                            widget.title,
+                            style: widget.titleStyle,
+                          ),
                         ),
                       ),
                     ))
@@ -138,17 +153,24 @@ class _ButtonWithLoaderState extends State<ButtonWithLoader> {
         // decoration: const BoxDecoration(shape: BoxShape.circle),
         child: Center(
           child: isDone
-              ? Icon(
-                  isDone && isSuccess
-                      ? widget.buttonData.buttonLoader.successIcon ??
-                          FluentIcons.check_mark
-                      : widget.buttonData.buttonLoader.errorIcon ??
-                          FluentIcons.error,
-                  color: isSuccess
-                      ? widget.buttonData.buttonLoader.successIconColor
-                      : widget.buttonData.buttonLoader.errorIconColor,
-                  size: 30,
-                )
+              ? widget.buttonData.buttonLoader.customWidgetInSuccess != null &&
+                      isSuccess
+                  ? widget.buttonData.buttonLoader.customWidgetInSuccess
+                  : widget.buttonData.buttonLoader.customWidgetInError !=
+                              null &&
+                          !isSuccess
+                      ? widget.buttonData.buttonLoader.customWidgetInError
+                      : Icon(
+                          isDone && isSuccess
+                              ? widget.buttonData.buttonLoader.successIcon ??
+                                  FluentIcons.check_mark
+                              : widget.buttonData.buttonLoader.errorIcon ??
+                                  FluentIcons.error,
+                          color: isSuccess
+                              ? widget.buttonData.buttonLoader.successIconColor
+                              : widget.buttonData.buttonLoader.errorIconColor,
+                          size: 30,
+                        )
               : widget.buttonData.buttonLoader.loader ??
                   (widget.buttonData.useFluentUi
                       ? widget.buttonData.buttonLoader.fluentUILoader
@@ -171,6 +193,7 @@ class _ButtonWithLoaderState extends State<ButtonWithLoader> {
     setState(() {});
   }
 
+  /// bool isSuccess == false it meaning error
   void isSuccess(bool isSuccess) async {
     isDone = true;
     if (isSuccess) {

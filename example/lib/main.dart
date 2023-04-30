@@ -33,23 +33,6 @@ class _MainAppState extends State<MainApp> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
-              child: ButtonWithLoader(
-                onPressed: (startLoading, stopLoading,
-                    Function(bool isSuccess) isSuccess, state) {
-                  this.startLoading = startLoading;
-                  this.stopLoading = stopLoading;
-                  this.isSuccess = isSuccess;
-                  this.startLoading?.call();
-                  Future.delayed(const Duration(seconds: 2), () {
-                    this.stopLoading?.call();
-                  });
-                },
-                buttonData: const ButtonLoaderData(),
-                title: 'Click Me',
-              ),
-            ),
-            const SizedBox(height: 10),
-            Center(
               child: FluentTheme(
                 data: FluentThemeData(),
                 child: ButtonWithLoader(
@@ -59,13 +42,32 @@ class _MainAppState extends State<MainApp> {
                     this.stopLoading = stopLoading;
                     this.isSuccess = isSuccess;
                     this.startLoading?.call();
-
                     Future.delayed(const Duration(seconds: 2), () {
-                      this.isSuccess?.call(true);
+                      this.stopLoading?.call();
                     });
                   },
-                  title: 'success',
+                  buttonData: const ButtonLoaderData(
+                      useFluentUi: true, borderRadius: 10),
+                  title: 'Click Me',
                 ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Center(
+              child: ButtonWithLoader(
+                onPressed: (startLoading, stopLoading,
+                    Function(bool isSuccess) isSuccess, state) {
+                  this.startLoading = startLoading;
+                  this.stopLoading = stopLoading;
+                  this.isSuccess = isSuccess;
+                  this.startLoading?.call();
+
+                  Future.delayed(const Duration(seconds: 2), () {
+                    this.isSuccess?.call(true);
+                  });
+                },
+                title: 'success',
+                buttonData: const ButtonLoaderData(borderRadius: 30),
               ),
             ),
             const SizedBox(height: 10),
@@ -82,6 +84,9 @@ class _MainAppState extends State<MainApp> {
                   });
                 },
                 title: 'error',
+                buttonData: const ButtonLoaderData(
+                    buttonLoader: ButtonLoader(
+                        customWidgetInError: Icon(Icons.running_with_errors))),
               ),
             ),
             const SizedBox(height: 10),
