@@ -1,3 +1,11 @@
+##  1.0.6
+* Solve pub dev analysis for support platform
+* Image not display in pub dev
+
+##  1.0.5
+* Make this package as Plugin
+
+
 ##  1.0.4
 * Solve img in readme
 * Alert this package support all platforms without web

@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  tbib_button_with_loader
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
