@@ -1,6 +1,6 @@
 ##  TBIB Button with loader
 
-<img src="assets/github/screenshot.png" />
+<img src="https://github.com/the-best-is-best/tbib_button_with_loader/blob/master/assets/github/Screenshot.png" />
 
 
 ### Import
