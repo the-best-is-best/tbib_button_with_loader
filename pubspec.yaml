@@ -1,7 +1,7 @@
 name: tbib_button_with_loader
 description: This Library now you can create button with loader and use flutter
   3 and fluent ui for desktop native ui.
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/the-best-is-best/tbib_button_with_loader
 
 environment:
@@ -12,6 +12,7 @@ dependencies:
   fluent_ui: ^4.5.0
   flutter:
     sdk: flutter
+  macos_ui: ^1.12.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0

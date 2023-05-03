@@ -1,8 +1,9 @@
 import 'dart:async';
 
-import 'package:fluent_ui/fluent_ui.dart' hide Colors, OutlinedButton;
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:tbib_button_with_loader/tbib_button_with_loader.dart';
+import 'package:macos_ui/macos_ui.dart' as macos;
 
 void main() {
   runApp(const MainApp());
@@ -48,7 +49,28 @@ class _MainAppState extends State<MainApp> {
                   },
                   buttonData: const ButtonLoaderData(
                       useFluentUi: true, borderRadius: 10),
-                  title: 'Click Me',
+                  title: 'Click Me fluent os button',
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Center(
+              child: macos.MacosTheme(
+                data: macos.MacosThemeData(),
+                child: ButtonWithLoader(
+                  onPressed: (startLoading, stopLoading,
+                      Function(bool isSuccess) isSuccess, state) {
+                    this.startLoading = startLoading;
+                    this.stopLoading = stopLoading;
+                    this.isSuccess = isSuccess;
+                    this.startLoading?.call();
+                    Future.delayed(const Duration(seconds: 2), () {
+                      this.stopLoading?.call();
+                    });
+                  },
+                  buttonData:
+                      const ButtonLoaderData(useMacUi: true, borderRadius: 10),
+                  title: 'Click Me mac os button',
                 ),
               ),
             ),
