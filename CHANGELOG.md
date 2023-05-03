@@ -1,3 +1,6 @@
+##  1.0.4
+* Solve img in readme
+
 ##  1.0.3
 * Support macos library for mac desktop
 * Add image for example ui
