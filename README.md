@@ -1,5 +1,10 @@
 ##  TBIB Button with loader
 
+# Alert - This package support all platform without web
+
+## this issue because you can use macos ui in macos plugin
+### but this package control it auto
+
 <img src="https://github.com/the-best-is-best/tbib_button_with_loader/blob/master/assets/github/Screenshot.png" />
 
 

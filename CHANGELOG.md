@@ -1,5 +1,6 @@
 ##  1.0.4
 * Solve img in readme
+* Alert this package support all platforms without web
 
 ##  1.0.3
 * Support macos library for mac desktop
