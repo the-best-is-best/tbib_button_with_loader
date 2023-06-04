@@ -1,14 +1,14 @@
 library button_with_loading;
 
-export 'package:tbib_button_with_loader/styles/button_style.dart';
-
 import 'dart:io';
 
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:macos_ui/macos_ui.dart' as macos;
+//import 'package:macos_ui/macos_ui.dart' as macos;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:tbib_button_with_loader/styles/button_style.dart';
+
+export 'package:tbib_button_with_loader/styles/button_style.dart';
 
 typedef IsSuccess = void Function(bool isSuccess);
 
@@ -82,100 +82,101 @@ class _ButtonWithLoaderState extends State<ButtonWithLoader> {
                         ),
                       )),
                 )
-              : widget.buttonData.useMacUi && Platform.isMacOS
+              :
+              // widget.buttonData.useMacUi && Platform.isMacOS
+              //     ? ClipRRect(
+              //         borderRadius:
+              //             BorderRadius.circular(widget.buttonData.borderRadius),
+              //         child: macos.PushButton(
+              //             key: widget.buttonData.buttonKey,
+              //             buttonSize:
+              //                 widget.buttonData.macosButtonStyle.buttonSize,
+              //             alignment:
+              //                 widget.buttonData.macosButtonStyle.alignment,
+              //             borderRadius: BorderRadius.circular(
+              //                 widget.buttonData.borderRadius),
+              //             color: widget.buttonData.macosButtonStyle.color,
+              //             disabledColor:
+              //                 widget.buttonData.macosButtonStyle.disabledColor,
+              //             isSecondary:
+              //                 widget.buttonData.macosButtonStyle.isSecondary,
+              //             mouseCursor:
+              //                 widget.buttonData.macosButtonStyle.mouseCursor,
+              //             padding: widget.buttonData.macosButtonStyle.padding,
+              //             pressedOpacity:
+              //                 widget.buttonData.macosButtonStyle.pressedOpacity,
+              //             semanticLabel:
+              //                 widget.buttonData.macosButtonStyle.semanticLabel,
+              //             onPressed: () {
+              //               widget.onPressed?.call(
+              //                   startLoading, stopLoading, isSuccess, state);
+              //             },
+              //             child: Padding(
+              //               padding: const EdgeInsets.all(4.0),
+              //               child: Center(
+              //                 child: FittedBox(
+              //                   child: Text(
+              //                     widget.title,
+              //                     style: widget.titleStyle,
+              //                   ),
+              //                 ),
+              //               ),
+              //             )),
+              //       )
+              //     :
+              Platform.isAndroid
                   ? ClipRRect(
                       borderRadius:
                           BorderRadius.circular(widget.buttonData.borderRadius),
-                      child: macos.PushButton(
-                          key: widget.buttonData.buttonKey,
-                          buttonSize:
-                              widget.buttonData.macosButtonStyle.buttonSize,
-                          alignment:
-                              widget.buttonData.macosButtonStyle.alignment,
-                          borderRadius: BorderRadius.circular(
-                              widget.buttonData.borderRadius),
-                          color: widget.buttonData.macosButtonStyle.color,
-                          disabledColor:
-                              widget.buttonData.macosButtonStyle.disabledColor,
-                          isSecondary:
-                              widget.buttonData.macosButtonStyle.isSecondary,
-                          mouseCursor:
-                              widget.buttonData.macosButtonStyle.mouseCursor,
-                          padding: widget.buttonData.macosButtonStyle.padding,
-                          pressedOpacity:
-                              widget.buttonData.macosButtonStyle.pressedOpacity,
-                          semanticLabel:
-                              widget.buttonData.macosButtonStyle.semanticLabel,
-                          onPressed: () {
-                            widget.onPressed?.call(
-                                startLoading, stopLoading, isSuccess, state);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Center(
-                              child: FittedBox(
-                                child: Text(
-                                  widget.title,
-                                  style: widget.titleStyle,
-                                ),
-                              ),
-                            ),
-                          )),
+                      child: mat.FilledButton(
+                        key: widget.buttonData.buttonKey,
+                        autofocus: widget.buttonData.autofocus,
+                        focusNode: widget.buttonData.focusNode,
+                        onPressed: () => widget.onPressed
+                            ?.call(startLoading, stopLoading, isSuccess, state),
+                        onLongPress: () => widget.onLongPressed
+                            ?.call(startLoading, stopLoading, isSuccess, state),
+                        style: widget.buttonData.materialButtonStyle,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Text(
+                            widget.title,
+                            style: widget.titleStyle,
+                          ),
+                        ),
+                      ),
                     )
-                  : Platform.isAndroid
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              widget.buttonData.borderRadius),
-                          child: mat.FilledButton(
-                            key: widget.buttonData.buttonKey,
-                            autofocus: widget.buttonData.autofocus,
-                            focusNode: widget.buttonData.focusNode,
-                            onPressed: () => widget.onPressed?.call(
-                                startLoading, stopLoading, isSuccess, state),
-                            onLongPress: () => widget.onLongPressed?.call(
-                                startLoading, stopLoading, isSuccess, state),
-                            style: widget.buttonData.materialButtonStyle,
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Text(
-                                widget.title,
-                                style: widget.titleStyle,
-                              ),
-                            ),
-                          ),
-                        )
-                      : ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              widget.buttonData.borderRadius),
-                          child: CupertinoButton.filled(
-                            key: widget.buttonData.buttonKey,
-                            onPressed: () async {
-                              widget.onPressed?.call(
-                                  startLoading, stopLoading, isSuccess, state);
-                            },
-                            minSize:
-                                widget.buttonData.cupertinoButtonStyle.minSize,
+                  : ClipRRect(
+                      borderRadius:
+                          BorderRadius.circular(widget.buttonData.borderRadius),
+                      child: CupertinoButton.filled(
+                        key: widget.buttonData.buttonKey,
+                        onPressed: () async {
+                          widget.onPressed?.call(
+                              startLoading, stopLoading, isSuccess, state);
+                        },
+                        minSize: widget.buttonData.cupertinoButtonStyle.minSize,
 
-                            // style
-                            alignment: widget
-                                .buttonData.cupertinoButtonStyle.alignment,
-                            borderRadius: widget
-                                .buttonData.cupertinoButtonStyle.borderRadius,
-                            disabledColor: widget
-                                .buttonData.cupertinoButtonStyle.disabledColor,
-                            pressedOpacity: widget
-                                .buttonData.cupertinoButtonStyle.pressedOpacity,
+                        // style
+                        alignment:
+                            widget.buttonData.cupertinoButtonStyle.alignment,
+                        borderRadius:
+                            widget.buttonData.cupertinoButtonStyle.borderRadius,
+                        disabledColor: widget
+                            .buttonData.cupertinoButtonStyle.disabledColor,
+                        pressedOpacity: widget
+                            .buttonData.cupertinoButtonStyle.pressedOpacity,
 
-                            padding: const EdgeInsets.all(8),
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Text(
-                                widget.title,
-                                style: widget.titleStyle,
-                              ),
-                            ),
+                        padding: const EdgeInsets.all(8),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Text(
+                            widget.title,
+                            style: widget.titleStyle,
                           ),
-                        ))
+                        ),
+                      ),
+                    ))
           : _buildSpanner(isDone, state == ButtonSpinnerState.success),
     );
   }

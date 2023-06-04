@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/cupertino.dart' as cup;
-import 'package:macos_ui/macos_ui.dart' as macos;
+//import 'package:macos_ui/macos_ui.dart' as macos;
 import 'package:flutter/material.dart';
 
 class ButtonLoaderData {
@@ -12,7 +12,7 @@ class ButtonLoaderData {
   final fluent.ButtonStyle fluentButtonStyle;
 
   /// style button in macos ui app need macos ui package
-  final MacosButtonStyle macosButtonStyle;
+  //final MacosButtonStyle macosButtonStyle;
 
   /// style button in cupertino app
   final CupertinoButtonStyle cupertinoButtonStyle;
@@ -47,7 +47,7 @@ class ButtonLoaderData {
   const ButtonLoaderData({
     this.materialButtonStyle = const ButtonStyle(),
     this.fluentButtonStyle = const fluent.ButtonStyle(),
-    this.macosButtonStyle = const MacosButtonStyle(),
+    //  this.macosButtonStyle = const MacosButtonStyle(),
     this.cupertinoButtonStyle = const CupertinoButtonStyle(),
     this.buttonKey,
     this.borderRadius = 15,
@@ -76,26 +76,26 @@ class CupertinoButtonStyle {
   });
 }
 
-class MacosButtonStyle extends CupertinoButtonStyle {
-  final macos.ButtonSize buttonSize;
-  final Color? color;
-  final bool isSecondary;
-  final MouseCursor mouseCursor;
-  final EdgeInsetsGeometry? padding;
-  final String? semanticLabel;
+// class MacosButtonStyle extends CupertinoButtonStyle {
+//   final macos.ButtonSize buttonSize;
+//   final Color? color;
+//   final bool isSecondary;
+//   final MouseCursor mouseCursor;
+//   final EdgeInsetsGeometry? padding;
+//   final String? semanticLabel;
 
-  const MacosButtonStyle(
-      {this.buttonSize = macos.ButtonSize.large,
-      super.alignment,
-      this.color,
-      super.pressedOpacity,
-      super.borderRadius,
-      super.disabledColor,
-      this.isSecondary = false,
-      this.mouseCursor = SystemMouseCursors.basic,
-      this.padding,
-      this.semanticLabel});
-}
+//   const MacosButtonStyle(
+//       {this.buttonSize = macos.ButtonSize.large,
+//       super.alignment,
+//       this.color,
+//       super.pressedOpacity,
+//       super.borderRadius,
+//       super.disabledColor,
+//       this.isSecondary = false,
+//       this.mouseCursor = SystemMouseCursors.basic,
+//       this.padding,
+//       this.semanticLabel});
+// }
 
 class ButtonLoader {
   final IconData? successIcon;
