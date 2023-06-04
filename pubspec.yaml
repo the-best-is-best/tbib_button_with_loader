@@ -1,6 +1,6 @@
 name: tbib_button_with_loader
 description: Flutter widgets and themes implementing the current macOS design language.
-version: 1.0.7-dart3
+version: 1.0.8-dart3
 homepage: https://github.com/the-best-is-best/tbib_button_with_loader
 
 environment:

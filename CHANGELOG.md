@@ -1,7 +1,11 @@
+## 1.0.8-dart3
+
+* fix changelog
+
 ## 1.0.7-dart3
 
 * Support Dart 3 - Flutter 3.10.x
-* Not Support Macos Ui (Not Support Flutter 3)
+* Not Support Macos Ui (Support Flutter 3)
 
 ## 1.0.6
 
