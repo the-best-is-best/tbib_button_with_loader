@@ -2,7 +2,7 @@ name: Publish to pub.dev
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+*'
+      - "*"
 
 jobs:
   build:
@@ -12,7 +12,7 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.12'
+          flutter-version: "3.7.12"
       - name: Install dependencies
         run: flutter pub get
       - name: Analyze
@@ -27,4 +27,3 @@ jobs:
           credentialJson: ${{ secrets.PUB_CREDENTIAL_JSON }}
           flutter: true
           skipTests: true
-      
